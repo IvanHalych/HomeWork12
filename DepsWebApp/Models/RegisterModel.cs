@@ -27,13 +27,13 @@ namespace DepsWebApp.Models
         /// User have login
         /// </summary>
         [Required]
-        [StringLength(30,MinimumLength = 6)]
+        [RegularExpression(@"^[A-Za-z0-9._%+-]{6,}")]
         public string Login { get; set; }
         /// <summary>
         /// Use have password
         /// </summary>
         [Required]
-        [StringLength(30, MinimumLength = 6)]
+        [RegularExpression(@"^[A-Za-z0-9._%+-]{6,}$")]
         public string Password { get; set; }
     }
 }
