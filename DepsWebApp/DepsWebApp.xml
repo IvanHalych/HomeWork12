@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DepsWebApp</name>
+    </assembly>
+    <members>
+        <member name="T:DepsWebApp.Authentication.AccountServiceInMemory">
+            <summary>
+            Implements <see cref="T:DepsWebApp.Authentication.IAccountService"/>.
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Authentication.AccountServiceInMemory.RegisterAsync(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:DepsWebApp.Authentication.AccountServiceInMemory.LoginAsync(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:DepsWebApp.Authentication.AccountServiceInMemory.RemoveAsync(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:DepsWebApp.Authentication.BasicAuthenticationHandler">
+            <inheritdoc/>
+        </member>
+        <member name="M:DepsWebApp.Authentication.BasicAuthenticationHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions},Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder,Microsoft.AspNetCore.Authentication.ISystemClock,DepsWebApp.Authentication.IAccountService)">
+            <inheritdoc/>
+        </member>
+        <member name="M:DepsWebApp.Authentication.BasicAuthenticationHandler.HandleAuthenticateAsync">
+            <inheritdoc/>
+        </member>
+        <member name="T:DepsWebApp.Authentication.IAccountService">
+            <summary>
+            Account service abstraction.
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Authentication.IAccountService.RegisterAsync(System.String,System.String)">
+            <summary>
+            Registers user and assigns unique account id.
+            </summary>
+            <param name="login">User login.</param>
+            <param name="password">User password.</param>
+            <returns>Returns account of the created user or <c>null</c> if login already existed.</returns>
+            <exception cref="T:System.ArgumentNullException">Throws when one of the arguments is null.</exception>
+        </member>
+        <member name="M:DepsWebApp.Authentication.IAccountService.LoginAsync(System.String,System.String)">
+            <summary>
+            Login user and returns his account id.
+            </summary>
+            <param name="login">User login.</param>
+            <param name="password">User password.</param>
+            <returns>Returns user account id or <c>null</c> if user wasn't found or password is invalid.</returns>
+        </member>
+        <member name="M:DepsWebApp.Authentication.IAccountService.RemoveAsync(System.Int32)">
+            <summary>
+            Remove account.
+            </summary>
+            <param name="accountId">User account id.</param>
+            <returns>Returns awaiter.</returns>
+        </member>
+        <member name="T:DepsWebApp.Authentication.Model.Account">
+            <summary>
+            Account model.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Authentication.Model.Account.Id">
+            <summary>
+            Public id.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Authentication.Model.Account.PasswordHash">
+            <summary>
+            Password hash.
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Authentication.Model.Account.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="T:DepsWebApp.Authentication.Model.Session`1">
+            <summary>
+            Session.
+            </summary>
+            <typeparam name="T">Session data type.</typeparam>
+        </member>
+        <member name="P:DepsWebApp.Authentication.Model.Session`1.SessionData">
+            <summary>
+            Sessions data.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Authentication.Model.Session`1.AccountId">
+            <summary>
+            Session owner.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Authentication.Model.Session`1.Expiration">
+            <summary>
+            Session expiration.
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Authentication.Model.Session`1.#ctor">
+            <summary>
+            Constructor. 
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Authentication.Model.Session`1.#ctor(`0,System.Int32,System.DateTime)">
+            <summary>
+            Constructor. 
+            </summary>
+        </member>
+        <member name="T:DepsWebApp.Clients.IRatesProviderClient">
+            <summary>
+            Abstract currency rates provider interface.
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Clients.IRatesProviderClient.GetRatesAsync">
+            <summary>
+            Requests rates from  currency rates provider.
+            </summary>
+            <returns>Returns currency rates.</returns>
+        </member>
+        <member name="T:DepsWebApp.Clients.NbuClient">
+            <summary>
+            NBU currency rates provider.
+            For more details, please visit
+            https://bank.gov.ua/ua/open-data/api-dev
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Clients.NbuClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Options.IOptions{DepsWebApp.Options.NbuClientOptions})">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Clients.NbuClient.GetRatesAsync">
+            <inheritdoc/>
+        </member>
+        <member name="T:DepsWebApp.Contracts.NbuRate">
+            <summary>
+            NBU provider native data model for currency rate.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Contracts.NbuRate.Rate">
+            <summary>
+            Currency rate related to base currency (UAH).
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Contracts.NbuRate.Currency">
+            <summary>
+            Currency code.
+            </summary>
+        </member>
+        <member name="T:DepsWebApp.Controllers.AuthController">
+            <summary>
+            Controller registration
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Controllers.AuthController.#ctor(DepsWebApp.Authentication.IAccountService)">
+            <inheritdoc/>
+        </member>
+        <member name="M:DepsWebApp.Controllers.AuthController.Register(DepsWebApp.Models.RegisterModel)">
+            <summary>
+            Return token of registration
+            </summary>
+            <param name="register"> login and password</param>
+            <returns>string</returns>
+        </member>
+        <member name="T:DepsWebApp.Controllers.RatesController">
+            <summary>
+            Controller of weather forecast
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Controllers.RatesController.Get(System.String,System.String,System.Nullable{System.Decimal})">
+            <summary>
+            Get method show how much money we can exchange first currency on second currency, if request have amount, it will be exchanged
+            </summary>
+            <param name="srcCurrency">first currency</param>
+            <param name="dstCurrency">second currency</param>
+            <param name="amount">amount of money</param>
+            <returns>relation two currency</returns>
+        </member>
+        <member name="T:DepsWebApp.Models.CurrencyRate">
+            <summary>
+            Currency rate model.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.CurrencyRate.Currency">
+            <summary>
+            Currency code (ISO).
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.CurrencyRate.Rate">
+            <summary>
+            Currency rate related to base currency.
+            </summary>
+        </member>
+        <member name="T:DepsWebApp.Models.ExceptionModel">
+            <summary>
+            return if exception was throwed
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.ExceptionModel.Code">
+            <summary>
+            Code of exception 
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.ExceptionModel.Message">
+            <summary>
+            Massage was in exception
+            </summary>
+        </member>
+        <member name="T:DepsWebApp.Models.ExchangeResult">
+            <summary>
+            Exchange operation result.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.ExchangeResult.Rate">
+            <summary>
+            Exchange rate.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.ExchangeResult.SourceAmount">
+            <summary>
+            Amount in source currency.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.ExchangeResult.DestinationAmount">
+            <summary>
+            Amount in destination currency.
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Models.ExchangeResult.#ctor(System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="rate">Set <see cref="P:DepsWebApp.Models.ExchangeResult.Rate"/> value.</param>
+            <param name="srcAmount">Set <see cref="P:DepsWebApp.Models.ExchangeResult.SourceAmount"/> value.</param>
+            <param name="destAmount">Set <see cref="P:DepsWebApp.Models.ExchangeResult.DestinationAmount"/> value.</param>
+        </member>
+        <member name="T:DepsWebApp.Models.RegisterModel">
+            <summary>
+            Save when user was registered
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.RegisterModel.Login">
+            <summary>
+            User have login
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.RegisterModel.Password">
+            <summary>
+            Use have password
+            </summary>
+        </member>
+        <member name="T:DepsWebApp.Options.CacheOptions">
+            <summary>
+            Caching options.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Options.CacheOptions.RatesCacheLifeTime">
+            <summary>
+            Default rates cache lifetime.
+            </summary>
+        </member>
+        <member name="T:DepsWebApp.Services.IRatesService">
+            <summary>
+            Currency rates service.
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Services.IRatesService.ExchangeAsync(System.String,System.String,System.Decimal)">
+            <summary>
+            Exchanges given amount from source currency to destination currency.
+            </summary>
+            <param name="srcCurrency">Source currency</param>
+            <param name="destCurrency">Destination currency</param>
+            <param name="amount">Amount of funds.</param>
+            <returns>Returns exchange result or <c>null</c> if source or destination currency wasn't found.</returns>
+        </member>
+        <member name="M:DepsWebApp.Services.IRatesService.ActualizeRatesAsync">
+            <summary>
+            Actualize rates.
+            Kind of abstraction leak.
+            </summary>
+            <returns>Returns awaiter</returns>
+        </member>
+    </members>
+</doc>
